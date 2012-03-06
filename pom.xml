@@ -181,12 +181,14 @@
 			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jenkins-ci.main</groupId>
 			<artifactId>jenkins-test-harness</artifactId>
 			<version>1.452</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 </project>
