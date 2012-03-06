@@ -1,153 +1,167 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.jenkins-ci.plugins</groupId>
-    <artifactId>plugin</artifactId>
-    <version>1.452</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
+	<parent>
+		<groupId>org.jenkins-ci.plugins</groupId>
+		<artifactId>plugin</artifactId>
+		<version>1.452</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
-  <artifactId>ci-game</artifactId>
-  <packaging>hpi</packaging>
-  <version>1.19-SNAPSHOT</version>
-  <name>Jenkins Continuous Integration game</name>
-  <url>http://wiki.jenkins-ci.org/display/JENKINS/The+Continuous+Integration+Game+plugin</url>
-  
-  <scm>
-    <connection>scm:git@github.com:skydjol/ci-game-plugin.git</connection>
-    <developerConnection>scm:git@github.com:skydjol/ci-game-plugin.git</developerConnection>
-    <url>https://skydjol@github.com/skydjol/ci-game-plugin.git</url>
-  </scm>  
+	<artifactId>ci-game</artifactId>
+	<packaging>hpi</packaging>
+	<version>1.19-SNAPSHOT</version>
+	<name>Jenkins Continuous Integration game</name>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/The+Continuous+Integration+Game+plugin</url>
 
-  <distributionManagement>
-    <repository>
-      <id>maven.jenkins-ci.org</id>
-      <url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
-    </repository>
-  </distributionManagement>
+	<scm>
+		<connection>scm:git@github.com:skydjol/ci-game-plugin.git</connection>
+		<developerConnection>scm:git@github.com:skydjol/ci-game-plugin.git</developerConnection>
+		<url>https://skydjol@github.com/skydjol/ci-game-plugin.git</url>
+	</scm>
 
-  <licenses>
-    <license>
-    <name>MIT license</name>
-    <comments>All source code is under the MIT license.</comments>
-    </license>
-  </licenses>
+	<distributionManagement>
+		<repository>
+			<id>maven.jenkins-ci.org</id>
+			<url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 
-  <developers>
-    <developer>
-      <id>skydjol</id>
-      <name>skydjol</name>
-      <email>skydjol@gmail.com</email>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
-  
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <build>
-    <pluginManagement>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.5</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.3.1</version>
-            </plugin>
-        </plugins>
-    </pluginManagement>
-    <plugins>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <goals>deploy</goals>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
+	<licenses>
+		<license>
+			<name>MIT license</name>
+			<comments>All source code is under the MIT license.</comments>
+		</license>
+	</licenses>
 
-  <dependencies>
-<!--       <dependency> -->
-<!--       <groupId>org.jvnet.hudson.main</groupId> -->
-<!--       <artifactId>hudson-test-harness</artifactId> -->
-<!--       <version>${project.parent.version}</version> -->
-<!--       <scope>test</scope> -->
-<!--     </dependency> -->
+	<developers>
+		<developer>
+			<id>skydjol</id>
+			<name>skydjol</name>
+			<email>skydjol@gmail.com</email>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
 
-    <dependency>
-      <groupId>org.jvnet.hudson.plugins</groupId>
-      <artifactId>checkstyle</artifactId>
-      <version>3.24</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson.plugins</groupId>
-      <artifactId>findbugs</artifactId>
-      <version>4.34</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
-      <artifactId>violations</artifactId>
-      <version>0.7.10</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson.plugins</groupId>
-      <artifactId>tasks</artifactId>
-      <version>4.27</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson.plugins</groupId>
-      <artifactId>pmd</artifactId>
-      <version>3.25</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson.plugins</groupId>
-      <artifactId>warnings</artifactId>
-      <version>3.28</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.hudson.plugins</groupId>
-      <artifactId>analysis-core</artifactId>
-      <version>1.35</version>    
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>1.8.5</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-core</artifactId>
-      <version>1.2.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-	    <groupId>com.google.collections</groupId>
-	    <artifactId>google-collections</artifactId>
-	    <version>1.0</version>
-	    <scope>test</scope>
-    </dependency>
-  </dependencies>
+	<repositories>
+		<repository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.3.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<dependencies>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jvnet.hudson.main</groupId> -->
+		<!-- <artifactId>hudson-test-harness</artifactId> -->
+		<!-- <version>${project.parent.version}</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.jvnet.hudson.plugins</groupId>
+			<artifactId>checkstyle</artifactId>
+			<version>3.24</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.hudson.plugins</groupId>
+			<artifactId>findbugs</artifactId>
+			<version>4.33</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jenkins-ci.plugins</groupId>
+			<artifactId>violations</artifactId>
+			<version>0.7.10</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.hudson.plugins</groupId>
+			<artifactId>tasks</artifactId>
+			<version>4.27</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.hudson.plugins</groupId>
+			<artifactId>pmd</artifactId>
+			<version>3.25</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.hudson.plugins</groupId>
+			<artifactId>warnings</artifactId>
+			<version>3.28</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.hudson.plugins</groupId>
+			<artifactId>analysis-core</artifactId>
+			<version>1.35</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.8.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.2.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 </project>
