@@ -185,12 +185,6 @@
 			<groupId>org.jenkins-ci.main</groupId>
 			<artifactId>jenkins-test-harness</artifactId>
 			<version>1.452</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>javadoc</artifactId>
-					<groupId>org.jenkins-ci.plugins</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 
