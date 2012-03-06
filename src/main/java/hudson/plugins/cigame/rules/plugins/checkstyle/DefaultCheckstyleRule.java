@@ -63,12 +63,11 @@ public class DefaultCheckstyleRule implements AggregatableRule<Integer> {
     		return RuleResult.EMPTY_INT_RESULT;
     	}
 
-    	   
-    	boolean isMavenProject=false;
+    	       	
         int currentAnnotations = 0;
         int previousAnnotations = 0;
         
-    	if(isMavenProject)
+    	if(build instanceof MavenBuild)
     	{
     	    List<CheckStyleMavenResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, CheckStyleMavenResultAction.class);
     	    List<CheckStyleMavenResultAction> previousActions=ActionRetriever.getResult(previousBuild, Result.UNSTABLE, CheckStyleMavenResultAction.class);
