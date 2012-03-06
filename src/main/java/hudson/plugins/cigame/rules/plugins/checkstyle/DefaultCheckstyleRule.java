@@ -6,6 +6,7 @@ import java.util.List;
 import hudson.maven.MavenBuild;
 import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.plugins.checkstyle.CheckStyleMavenResultAction;
 import hudson.plugins.checkstyle.CheckStyleResultAction;
 import hudson.plugins.cigame.model.AggregatableRule;
 import hudson.plugins.cigame.model.RuleResult;
@@ -61,18 +62,45 @@ public class DefaultCheckstyleRule implements AggregatableRule<Integer> {
     	} else if (previousBuild.getResult().isWorseOrEqualTo(Result.FAILURE)) {
     		return RuleResult.EMPTY_INT_RESULT;
     	}
-    	
-    	List<CheckStyleResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, CheckStyleResultAction.class);
-    	if (!hasNoErrors(currentActions)) {
-    		return RuleResult.EMPTY_INT_RESULT;
+
+    	   
+    	boolean isMavenProject=false;
+        int currentAnnotations = 0;
+        int previousAnnotations = 0;
+        
+    	if(isMavenProject)
+    	{
+    	    List<CheckStyleMavenResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, CheckStyleMavenResultAction.class);
+    	    List<CheckStyleMavenResultAction> previousActions=ActionRetriever.getResult(previousBuild, Result.UNSTABLE, CheckStyleMavenResultAction.class);
+    	    
+    	    if (!hasMavenNoErrors(currentActions)) {
+                return RuleResult.EMPTY_INT_RESULT;
+            }
+            currentAnnotations = getMavenNumberOfAnnotations(currentActions);
+                
+
+            if (!hasMavenNoErrors(previousActions)) {
+                return RuleResult.EMPTY_INT_RESULT; 
+            }
+            previousAnnotations = getMavenNumberOfAnnotations(previousActions);
     	}
-    	int currentAnnotations = getNumberOfAnnotations(currentActions);
-    		
-    	List<CheckStyleResultAction> previousActions = ActionRetriever.getResult(previousBuild, Result.UNSTABLE, CheckStyleResultAction.class);
-    	if (!hasNoErrors(previousActions)) {
-    		return RuleResult.EMPTY_INT_RESULT; 
+    	else
+    	{     	            	            	    
+    	    List<CheckStyleResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, CheckStyleResultAction.class);
+    	    List<CheckStyleResultAction> previousActions=ActionRetriever.getResult(previousBuild, Result.UNSTABLE, CheckStyleResultAction.class);
+    	    
+    	    
+	       if (!hasNoErrors(currentActions)) {
+	            return RuleResult.EMPTY_INT_RESULT;
+	        }
+	        currentAnnotations = getNumberOfAnnotations(currentActions);
+	            
+
+	        if (!hasNoErrors(previousActions)) {
+	            return RuleResult.EMPTY_INT_RESULT; 
+	        }
+	        previousAnnotations = getNumberOfAnnotations(previousActions);
     	}
-    	int previousAnnotations = getNumberOfAnnotations(previousActions);
     	
     	int numberOfNewWarnings = currentAnnotations - previousAnnotations;
     	if (numberOfNewWarnings > 0) {
@@ -121,6 +149,23 @@ public class DefaultCheckstyleRule implements AggregatableRule<Integer> {
     private int getNumberOfAnnotations(List<CheckStyleResultAction> actions) {
         int numberOfAnnotations = 0;
         for (CheckStyleResultAction action : actions) {
+            numberOfAnnotations += action.getResult().getNumberOfAnnotations();
+        }
+        return numberOfAnnotations;
+    }
+    
+    private boolean hasMavenNoErrors(List<CheckStyleMavenResultAction> actions) {
+        for (CheckStyleMavenResultAction action : actions) {
+            if (action.getResult().hasError()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private int getMavenNumberOfAnnotations(List<CheckStyleMavenResultAction> actions) {
+        int numberOfAnnotations = 0;
+        for (CheckStyleMavenResultAction action : actions) {
             numberOfAnnotations += action.getResult().getNumberOfAnnotations();
         }
         return numberOfAnnotations;
