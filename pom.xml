@@ -185,6 +185,7 @@
 			<groupId>org.jenkins-ci.main</groupId>
 			<artifactId>jenkins-test-harness</artifactId>
 			<version>1.452</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
